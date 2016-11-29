@@ -6,7 +6,7 @@ conn = sqlite3.connect(DATABASE)
 c = conn.cursor()
 
 def create_table():
-    c.execute('CREATE TABLE IF NOT EXISTS messageTable(message TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS messageTable(id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)')
     
 
 

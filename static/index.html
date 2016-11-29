@@ -14,17 +14,25 @@
     <h1>Hello, world!</h1>
       <form action="/dataBase" method="POST">
 		  <div class="form-group">
-			<label for="name">User input</label>
-			<input type="text" class="form-control" name="messageInput" id="messageInput">
+			<input type="text"class="form-control" name="messageInput" id="messageInput">
 		  </div>
-		  <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" id="submit">Submit</button>
+          <button type="reset" id="reset">Reset</button>
       </form>
+        <!-- 
       <form action="/dataBase" method="POST">
 		  <div class="form-group">
 			<label for="serveroutput">Server result</label>
 			<textarea class="form-control" id="serveroutput" rows="10" placeholder="Please submit an input above."  readonly></textarea>
           </div>
       </form>
+         -->
+        
+        <table id="messageOutput">
+            <tr>
+                <td id="serveroutput"></td>
+            </tr>
+        </table>
     </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -39,11 +47,20 @@
 			$.post("/data", data, function(resbody){
 				//$("#serveroutput").text(resbody);
 			});
-              
-            $.post("/dataBase", function( data ) {
+               $.post("/dataBase", function( data ) {
                 $( "#serveroutput" ).html( data );
-});
+            });
+            
 		});
+          
+          
+          
+          function myFunction() {
+            var table = document.getElementById("messageOutput");
+                var row = table.insertRow(0);
+                var message = row.insertCell(0);
+                message.innerHTML = "#serveroutput";
+          }
       </script>
   </body>
 </html>

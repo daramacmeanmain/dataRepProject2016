@@ -1,5 +1,5 @@
 import flask as fl 
-from flask import render_template, request, g
+from flask import request, g
 import sqlite3
 
 DATABASE = 'data/project.db'
@@ -28,10 +28,8 @@ def update_db():
 def user_data():
     conn = sqlite3.connect(DATABASE)
     c = get_db().cursor()
-    c.execute("SELECT * FROM messageTable")
+    c.execute("SELECT message FROM messageTable ORDER BY id DESC LIMIT 1")
     return str(c.fetchall())
-
-
 
 @app.teardown_appcontext
 def close_connection(exception):
