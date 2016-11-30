@@ -12,30 +12,29 @@
   <body>
     <div class="container">
     <h1>Message Board</h1>
-      <form action="/dataBase" method="POST">
+      <form>
 		  <div class="form-group">
-              <input type="text"class="form-control" name="userInput" id="userInput"><br />
-              <input type="text"class="form-control" name="messageInput" id="messageInput"><br />
+              <input  action="/dataBase" method="POST" type="text"class="form-control" name="userInput" id="userInput"><br />
+              <input  action="/dataBase" method="POST" type="text"class="form-control" name="messageInput" id="messageInput"><br />
 		  </div>
-		  <button type="submit" id="submit">Submit</button>
+		  <button type="submit" id="submit" onlick="newUserRow()" onlick="newMessageRow()">Submit</button>
           <button type="reset" id="reset">Reset</button>
       </form>
-        
+         <!--
       <form action="/dataBase" method="POST">
 		  <div class="form-group">
 			<label for="serveroutput">Server result</label>
 			<textarea class="form-control" id="serveroutput" rows="10" placeholder="Please submit an input above."  readonly \n></textarea>
           </div>
       </form>
-         
-        <!-- 
-        <table id="messageOutput">
-            <tr>
-                <td id="serveroutput"></td>
-                <br>
-            </tr>
-        </table>
--->
+         -->
+        
+        <ul id = serveroutput>
+            {% for user in dataOutput %}
+            <li id = userOutput>{{ user[0] }}</li>
+            {% endfor %}
+        </ul>
+        
     </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -43,6 +42,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
       <script>
+          /*$("#submit").click(function(e) {
+			e.preventDefault();
+			
+			messageData = {messageInput: $("#messageInput").val()}
+                $.post("/messageData", messageData, function(resbody){
+			});
+              
+            userData = {userInput: $("#userInput").val()}
+                $.post("/userData", userData, function(resbody){
+			});
+              
+            $.post("/userDataBase", function( userData ) {
+                $( "#userOutput" ).html( userData );
+            });
+              
+            $.post("/messageDataBase", function( messageData ) {
+                $( "#messageOutput" ).html( messageData );
+            });
+
+            
+		});*/
+          
+          function newUserRow() {
+            var table = document.getElementById("userOutput");
+                var row = table.insertRow(0);
+                var user = row.insertCell(0);
+          }
+          
+          function newMessageRow() {
+            var table = document.getElementById("messageOutput");
+                var row = table.insertRow(0);
+                var message = row.insertCell(0);
+          }
+          
           $("#submit").click(function(e) {
 			e.preventDefault();
 			
@@ -61,16 +94,8 @@
             $.post("/dataBase", function( messageData ) {
                 $( "#serveroutput" ).html( messageData );
             });
-
             
 		});
-          
-         /* function newRow() {
-            var table = document.getElementById("messageOutput");
-                var row = table.insertRow(0);
-                var message = row.insertCell(0);
-              
-          }*/
       </script>
   </body>
 </html>
