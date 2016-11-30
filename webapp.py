@@ -18,8 +18,14 @@ def get_db():
         db = fl.g._database = sqlite3.connect(DATABASE)
     return db
 
-@app.route('/data', methods = ['GET', 'POST'])        
-def update_db():
+@app.route('/userData', methods = ['GET', 'POST'])        
+def update_userData():
+    c.execute("INSERT INTO userTable(user) VALUES(?)",(fl.request.form['userInput'],))
+    conn.commit()
+    return str(c.fetchall())
+
+@app.route('/messageData', methods = ['GET', 'POST'])        
+def update_messageData():
     c.execute("INSERT INTO messageTable(message) VALUES(?)",(fl.request.form['messageInput'],))
     conn.commit()
     return str(c.fetchall())
@@ -28,7 +34,9 @@ def update_db():
 def user_data():
     conn = sqlite3.connect(DATABASE)
     c = get_db().cursor()
-    c.execute("SELECT message FROM messageTable ORDER BY id DESC LIMIT 1")
+    ##for row in c.execute("SELECT message FROM messageTable ORDER BY id DESC"):
+    ##message = row[0]
+    c.execute("SELECT user, message FROM messageTable INNER JOIN userTable on userTable.userId = messageTable.messageId ORDER BY messageId DESC")
     return str(c.fetchall())
 
 @app.teardown_appcontext

@@ -11,28 +11,31 @@
   </head>
   <body>
     <div class="container">
-    <h1>Hello, world!</h1>
+    <h1>Message Board</h1>
       <form action="/dataBase" method="POST">
 		  <div class="form-group">
-			<input type="text"class="form-control" name="messageInput" id="messageInput">
+              <input type="text"class="form-control" name="userInput" id="userInput"><br />
+              <input type="text"class="form-control" name="messageInput" id="messageInput"><br />
 		  </div>
 		  <button type="submit" id="submit">Submit</button>
           <button type="reset" id="reset">Reset</button>
       </form>
-        <!-- 
+        
       <form action="/dataBase" method="POST">
 		  <div class="form-group">
 			<label for="serveroutput">Server result</label>
-			<textarea class="form-control" id="serveroutput" rows="10" placeholder="Please submit an input above."  readonly></textarea>
+			<textarea class="form-control" id="serveroutput" rows="10" placeholder="Please submit an input above."  readonly \n></textarea>
           </div>
       </form>
-         -->
-        
+         
+        <!-- 
         <table id="messageOutput">
             <tr>
                 <td id="serveroutput"></td>
+                <br>
             </tr>
         </table>
+-->
     </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -43,24 +46,31 @@
           $("#submit").click(function(e) {
 			e.preventDefault();
 			
-			data = {messageInput: $("#messageInput").val()}
-			$.post("/data", data, function(resbody){
-				//$("#serveroutput").text(resbody);
+			messageData = {messageInput: $("#messageInput").val()}
+                $.post("/messageData", messageData, function(resbody){
 			});
-               $.post("/dataBase", function( data ) {
-                $( "#serveroutput" ).html( data );
+              
+            userData = {userInput: $("#userInput").val()}
+                $.post("/userData", userData, function(resbody){
+			});
+              
+            $.post("/dataBase", function( userData ) {
+                $( "#serveroutput" ).html( userData );
             });
+              
+            $.post("/dataBase", function( messageData ) {
+                $( "#serveroutput" ).html( messageData );
+            });
+
             
 		});
           
-          
-          
-          function myFunction() {
+         /* function newRow() {
             var table = document.getElementById("messageOutput");
                 var row = table.insertRow(0);
                 var message = row.insertCell(0);
-                message.innerHTML = "#serveroutput";
-          }
+              
+          }*/
       </script>
   </body>
 </html>
