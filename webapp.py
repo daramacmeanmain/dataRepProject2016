@@ -18,7 +18,7 @@ def get_db():
         db = fl.g._database = sqlite3.connect(DATABASE)
     return db
 
-@app.route('/userData', methods = ['GET', 'POST'])        
+@app.route('/userData', methods = ['GET', 'POST'])
 def update_userData():
     c.execute("INSERT INTO userTable(user) VALUES(?)",(fl.request.form['userInput'],))
     conn.commit()
