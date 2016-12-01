@@ -18,7 +18,7 @@ def get_db():
         db = fl.g._database = sqlite3.connect(DATABASE)
     return db
 
-@app.route('/userData', methods = ['GET', 'POST'])
+@app.route('/userData', methods = ['GET', 'POST'])        
 def update_userData():
     c.execute("INSERT INTO userTable(user) VALUES(?)",(fl.request.form['userInput'],))
     conn.commit()
@@ -52,7 +52,7 @@ def user_data():
     c = get_db().cursor()
     ##for row in c.execute("SELECT message FROM messageTable ORDER BY id DESC"):
     ##message = row[0]
-    dataOutput = c.execute("SELECT user, message FROM messageTable INNER JOIN userTable on userTable.userId = messageTable.messageId ORDER BY messageId DESC").fetchall()
+    dataOutput = c.execute("SELECT user, message FROM messageTable INNER JOIN userTable on userTable.userId = messageTable.messageId ORDER BY messageId DESC LIMIT 1").fetchall()
     return render_template('index.html', dataOutput=dataOutput)
     
 @app.teardown_appcontext

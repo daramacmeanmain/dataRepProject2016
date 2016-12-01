@@ -9,7 +9,7 @@
           </div>
       </form>
          -->
-        <table id = "serveroutput" style="border: 5px doubleblack;">
+        <table id = "serveroutput" border="1">
 			<tr>
 				{% for user, message in dataOutput %}
 				<td>{{ user }}</td>
@@ -21,9 +21,6 @@
 				{% endfor %}
 			</tr>
         </table>
-		
-		
-		
 {% endblock %}
         
     
