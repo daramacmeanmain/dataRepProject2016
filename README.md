@@ -15,8 +15,9 @@ Once these prerequisites are met, the application can be run locally by cloning 
 ```
 $ cd C:\Users\[NAME]\[SAVED DIRECTORY]\dataRepProject2016
 ```
-From there you must first run the db.py file in order to initialise the database, followed by webapp.py to run the application
+From there you must first create a folder in the app directory called 'data', then run the db.py file in order to initialise the database, followed by webapp.py to run the application
 ```
+$ mkdir data
 $ python db.py
 $ python webapp.py
 ```
