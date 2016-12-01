@@ -1,14 +1,8 @@
+<!-- Adapted from http://flask.pocoo.org/docs/0.11/tutorial/templates/ -->
+
 {% extends "base.html" %}
 {% block content %}
 
-         <!--
-      <form action="/dataBase" method="POST">
-		  <div class="form-group">
-			<label for="serveroutput">Server result</label>
-			<textarea class="form-control" id="serveroutput" rows="10" placeholder="Please submit an input above."  readonly \n></textarea>
-          </div>
-      </form>
-         -->
         <table id = "serveroutput" border="1">
 			<tr>
 				{% for user, message in dataOutput %}
@@ -21,6 +15,7 @@
 				{% endfor %}
 			</tr>
         </table>
+
 {% endblock %}
         
     
